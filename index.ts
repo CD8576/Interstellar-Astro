@@ -9,7 +9,7 @@ import { server as wisp } from "@mercuryworkshop/wisp-js/server";
 import { build } from "astro";
 import Fastify from "fastify";
 import inConfig from "./config";
-const port = Number.parseInt(process.env.PORT as string) || inConfig.port || 8000;
+const port = Number.parseInt(process.env.PORT as string) || inConfig.port || 8080;
 const app = Fastify({
   serverFactory: (handler) =>
     createServer(handler).on("upgrade", (req, socket: Socket, head) =>
