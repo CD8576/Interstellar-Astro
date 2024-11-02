@@ -12,5 +12,5 @@ RUN pnpm install
 COPY . .
 
 RUN pnpm i
-RUN pnpm disable # Optional: Disables Astro's Telemetry - https://astro.build/telemetry
+RUN pnpm disable
 RUN pnpm build
