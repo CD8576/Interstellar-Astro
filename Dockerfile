@@ -9,8 +9,9 @@ COPY ["package.json", "pnpm-lock.yaml*", "./"]
 
 RUN pnpm install
 
+RUN pnpm i
+
 COPY . .
 
-RUN pnpm i
 RUN pnpm disable
 RUN pnpm build
