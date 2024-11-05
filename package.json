@@ -50,4 +50,5 @@
   "resolutions": {
     "cookie": "^0.7.0"
   }
+  "packageManager": "pnpm@7.0.0" 
 }
