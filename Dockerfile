@@ -11,4 +11,6 @@ RUN npm install -g pnpm \
 COPY . .
 RUN pnpm install
 
+RUN pnpm add @types/js-cookie
+
 RUN pnpm build
