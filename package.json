@@ -10,7 +10,8 @@
     "astro": "astro",
     "disable": "npx astro telemetry disable",
     "precommit": "pnpm check && pnpm typecheck",
-    "check": "prettier --write . && biome check --write ."
+    "check": "prettier --write . && biome check --write .",
+    "packageManager": "pnpm@7.0.0"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -41,6 +42,7 @@
     "@types/node": "^22.8.2",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1"
+    
   },
   "pnpm": {
     "overrides": {
@@ -50,5 +52,4 @@
   "resolutions": {
     "cookie": "^0.7.0"
   }
-  "packageManager": "pnpm@7.0.0" 
 }
