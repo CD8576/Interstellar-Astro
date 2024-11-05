@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y git
 COPY ["package.json", "pnpm-lock.yaml*", "./"]
 
 # Install dependencies
-RUN pnpm install
+RUN pnpm i
 
 # Optional: Disable Astro's Telemetry
 RUN pnpm disable
