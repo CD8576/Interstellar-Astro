@@ -32,14 +32,17 @@ export default defineConfig({
   },
   vite: {
     define: {
-      __COMMIT_DATE__: JSON.stringify(
-        let commitDate = "unknown";
+let commitDate = "unknown";
 try {
   commitDate = execSync("git show --no-patch --format=%ci").toString();
 } catch (error) {
   console.warn("Git is not available. Falling back to default commit date.");
 }
-      ),
+
+define: {
+  __COMMIT_DATE__: JSON.stringify(commitDate),
+},
+
     },
     plugins: [
       {
