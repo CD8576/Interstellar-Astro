@@ -14,3 +14,6 @@ RUN pnpm install
 RUN pnpm add @types/js-cookie
 
 RUN pnpm build
+
+EXPOSE 3000
+CMD ["npm", "start"]
