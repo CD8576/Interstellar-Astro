@@ -5,5 +5,6 @@ RUN npm install -g pnpm
 RUN git clone https://github.com/UseInterstellar/Interstellar-Astro
 WORKDIR "/Interstellar"
 
-RUN pnpm install && pnpm start
+RUN pnpm install 
+RUN pnpm start
 
