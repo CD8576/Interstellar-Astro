@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 ENV NODE_ENV=production
 RUN apt-get update && apt-get install -y git
-RUN npm install -g pnpm
+RUN npm install -y pnpm
 
 RUN git clone https://github.com/UseInterstellar/Interstellar-Astro
 WORKDIR "/Interstellar"
