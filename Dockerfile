@@ -11,4 +11,4 @@ RUN pnpm install
 
 COPY . .
 
-CMD ["build"]
+
