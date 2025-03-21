@@ -6,6 +6,11 @@ RUN npm install -g pnpm
 RUN git clone https://github.com/UseInterstellar/Interstellar-Astro
 WORKDIR "/Interstellar"
 
-RUN pnpm install 
-RUN pnpm start
+COPY ["package.json", "pnpm-lock.yaml*", "./"]
+
+RUN pnpm install
+
+COPY . .
+
+RUN pnpm build
 
