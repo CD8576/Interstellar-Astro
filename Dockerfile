@@ -1,14 +1,8 @@
-FROM node:bookworm-slim AS builder
-ENV NODE_ENV=production
+FROM ubuntu:latest
+RUN apt-get update && apt-get install -y git
 
-WORKDIR /app
+RUN git clone https://github.com/UseInterstellar/Interstellar-Astro
+WORKDIR "/Interstellar"
 
-RUN npm install -g pnpm
-
-COPY ["package.json", "pnpm-lock.yaml*", "./"]
-
-RUN pnpm install
-
-COPY . .
-
+RUN pnpm install && pnpm start
 
