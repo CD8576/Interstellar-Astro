@@ -11,4 +11,4 @@ RUN pnpm install
 
 COPY . .
 
-RUN npm build
+RUN npm run build
