@@ -73,13 +73,9 @@ async function Start() {
     })
     .register(fastifyMiddie);
   app.use(handler);
-  app.listen({ port }, (err, addr) => {
-    if (err) {
-      console.error("Server failed to start:", err);
-      process.exit(1);
-    }
-    console.log("✨ Server listening on %s", addr);
-  });
+  await app.listen({ port, host: "0.0.0.0" });
+console.log(`✨ Server listening on http://0.0.0.0:${port}`);
+
 }
 
 process.env.FIRST = process.env.FIRST || "true";
