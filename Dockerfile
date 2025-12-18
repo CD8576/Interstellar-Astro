@@ -3,28 +3,28 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 
-# Install git (needed for git commands and some pnpm installs)
+# Install git if needed
 RUN apt-get update && apt-get install -y git && apt-get clean
 
 # Install pnpm
 RUN npm install -g pnpm
 
-# Copy package files
-COPY ["package.json", "pnpm-lock.yaml*", "./"]
+# Set pnpm to allow all builds (so esbuild/sharp build scripts run)
+RUN pnpm config set dangerouslyAllowAllBuilds true
 
-# Install dependencies
+# Copy package and lock files
+COPY package.json pnpm-lock.yaml ./
+
+# Install dependencies (build scripts will now run)
 RUN pnpm install
 
-# Copy all source files
+# Copy rest of source
 COPY . .
 
-# Install deps at build time
-RUN pnpm install --frozen-lockfile
-
-# Build
+# Build your project
 RUN pnpm build
 
-# Runtime starts with only start command
+# Start command
 CMD ["sh", "-c", "pnpm install && pnpm start"]
 
 
