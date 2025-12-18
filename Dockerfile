@@ -9,13 +9,8 @@ RUN apt-get update && apt-get install -y git && apt-get clean
 # Install pnpm
 RUN npm install -g pnpm
 
-# Set pnpm to allow all builds (so esbuild/sharp build scripts run)
-RUN pnpm config set dangerouslyAllowAllBuilds true
-
 # Copy package and lock files
-COPY package.json pnpm-lock.yaml ./
-
-RUN echo "dangerouslyAllowAllBuilds=true" >> ~/.npmrc
+COPY ["package.json", "pnpm-lock.yaml", "./"]
 
 # Install dependencies (build scripts will now run)
 RUN pnpm install
