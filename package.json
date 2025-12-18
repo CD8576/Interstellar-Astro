@@ -61,6 +61,10 @@
       "nanoid": "~3.3.8",
       "brace-expansion": "~2.0.2"
     }
+       "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "bufferutil"
   },
   "resolutions": {
     "cookie": "^0.7.0"
