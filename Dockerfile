@@ -12,3 +12,5 @@ RUN pnpm install
 COPY . .
 
 RUN pnpm build
+
+CMD ["pnpm", "install", "&&", "pnpm", "start"]
