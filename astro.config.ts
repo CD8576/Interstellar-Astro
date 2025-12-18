@@ -14,6 +14,18 @@ import { defineConfig } from "astro/config";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import INConfig from "./config";
 
+// —— SAFE GIT COMMIT DATE ——
+let commitDate = "unknown";
+try {
+  commitDate = execSync("git show --no-patch --format=%ci")
+    .toString()
+    .trim();
+} catch (err) {
+  // Git not available (e.g., in Docker build),
+  // fall back to "unknown" without crashing.
+}
+// ————————————————————
+
 const integrations = [react(), tailwind({ applyBaseStyles: false })];
 
 if (INConfig.server?.compress !== false) {
@@ -28,7 +40,6 @@ if (INConfig.server?.compress !== false) {
   );
 }
 
-// https://astro.build/config
 export default defineConfig({
   output: "server",
   adapter: node({
@@ -50,7 +61,7 @@ export default defineConfig({
   },
   vite: {
     define: {
-      __COMMIT_DATE__: JSON.stringify(execSync("git show --no-patch --format=%ci").toString().trim()),
+      __COMMIT_DATE__: JSON.stringify(commitDate),
     },
     resolve: {
       alias: {
@@ -61,7 +72,13 @@ export default defineConfig({
       {
         name: "vite-wisp-server",
         configureServer(server) {
-          server.httpServer?.on("upgrade", (req, socket, head) => (req.url?.startsWith("/f") ? wisp.routeRequest(req, socket, head) : undefined));
+          server.httpServer?.on(
+            "upgrade",
+            (req, socket, head) =>
+              req.url?.startsWith("/f")
+                ? wisp.routeRequest(req, socket, head)
+                : undefined,
+          );
         },
       },
       viteStaticCopy({
@@ -82,7 +99,10 @@ export default defineConfig({
             src: `${uvPath}/**/*.js`.replace(/\\/g, "/"),
             dest: "assets/bundled",
             overwrite: false,
-            rename: (name) => `${name.replace("uv", "v").replace(/[aeiou]/gi, "")}.js`,
+            rename: (name) =>
+              `${name
+                .replace("uv", "v")
+                .replace(/[aeiou]/gi, "")}.js`,
           },
         ],
       }),
