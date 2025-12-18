@@ -13,4 +13,3 @@ COPY . .
 
 RUN pnpm build
 
-CMD ["pnpm", "install", "&&", "pnpm", "start"]
