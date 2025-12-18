@@ -15,6 +15,8 @@ RUN pnpm config set dangerouslyAllowAllBuilds true
 # Copy package and lock files
 COPY package.json pnpm-lock.yaml ./
 
+RUN echo "dangerouslyAllowAllBuilds=true" >> ~/.npmrc
+
 # Install dependencies (build scripts will now run)
 RUN pnpm install
 
