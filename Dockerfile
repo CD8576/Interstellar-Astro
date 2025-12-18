@@ -25,5 +25,6 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm build
 
 # Runtime starts with only start command
-CMD ["pnpm", "install", "&&", "pnpm", "start"]
+CMD ["sh", "-c", "pnpm install && pnpm start"]
+
 
