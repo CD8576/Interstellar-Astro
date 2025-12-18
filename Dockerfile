@@ -13,3 +13,8 @@ COPY . .
 
 RUN pnpm build
 
+# install deps during image build
+RUN pnpm install --frozen-lockfile
+
+# start the app
+CMD ["pnpm", "start"]
