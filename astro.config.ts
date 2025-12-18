@@ -105,6 +105,7 @@ export default defineConfig({
                 .replace(/[aeiou]/gi, "")}.js`,
           },
         ],
+      
       }),
     ],
   },
