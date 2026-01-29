@@ -14,6 +14,8 @@ import { defineConfig } from "astro/config";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 import INConfig from "./config";
 
+import vercel from "@astrojs/vercel";
+
 const integrations = [react(), tailwind({ applyBaseStyles: false })];
 
 if (INConfig.server?.compress !== false) {
@@ -31,9 +33,7 @@ if (INConfig.server?.compress !== false) {
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  adapter: node({
-    mode: "middleware",
-  }),
+  adapter: vercel(),
   integrations,
   prefetch: {
     defaultStrategy: "viewport",
