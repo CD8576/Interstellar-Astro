@@ -10,6 +10,5 @@ COPY ["package.json", "pnpm-lock.yaml*", "./"]
 
 RUN pnpm install
 # Install dependencies with bun and start the app
-RUN bun install
 
-CMD ["bun", "start"]
+CMD ["bun install","bun start"]
