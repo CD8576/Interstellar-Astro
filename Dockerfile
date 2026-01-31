@@ -8,12 +8,6 @@ RUN npm install -g pnpm bun
 
 COPY ["package.json", "pnpm-lock.yaml*", "./"]
 
-RUN pnpm install
-
-COPY . .
-
-RUN pnpm build
-
 # Install dependencies with bun and start the app
 RUN bun install
 
