@@ -3,12 +3,12 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 
-# Install pnpm and bun globally
-RUN npm install -g pnpm bun
+RUN npm install -g pnpm
 
 COPY ["package.json", "pnpm-lock.yaml*", "./"]
 
 RUN pnpm install
-# Install dependencies with bun and start the app
 
-CMD ["bun install","bun start"]
+COPY . .
+
+RUN pnpm build
