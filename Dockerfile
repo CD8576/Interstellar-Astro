@@ -8,7 +8,7 @@ WORKDIR /app
 
 # Install dependencies first (better caching)
 
-RUN npm ci
+RUN npm install 
 
 # Copy the rest of the source code
 COPY . .
