@@ -27,7 +27,7 @@ COPY bun.lock* ./
 # -----------------------------
 # Install dependencies with Bun
 # -----------------------------
-RUN bun install --frozen-lockfile
+RUN bun install && bun start
 
 # -----------------------------
 # Copy rest of the source
