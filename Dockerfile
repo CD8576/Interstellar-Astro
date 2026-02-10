@@ -3,9 +3,6 @@
 # =========================
 FROM node:20-alpine AS builder
 
-# Set working directory
-WORKDIR /app
-
 # Install dependencies first (better caching)
 
 RUN npm install 
