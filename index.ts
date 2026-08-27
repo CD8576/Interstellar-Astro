@@ -420,7 +420,7 @@ self.addEventListener("fetch", (event) => {
           }
 
           let body = Buffer.concat(chunks);
-          const encodingHeader = (headers["content-encoding"] || headers["Content-Encoding"] || res.getHeader("content-encoding") || res.getHeader("Content-Encoding")) as string | string[] | undefined;
+          const encodingHeader = (headers["content-encoding"] || headers["Content-Encoding"] || res.getHeader("content-encoding") || res.getHeader("Content-Encoding")) as string | string[] | undefined[...]
           const encoding = Array.isArray(encodingHeader) ? encodingHeader[0] : encodingHeader;
           if (encoding) {
             try {
@@ -476,7 +476,7 @@ self.addEventListener("fetch", (event) => {
   } else {
     app.use(handler);
   }
-  app.listen({ port }, (err, addr) => {
+  app.listen({ port, host: "0.0.0.0" }, (err, addr) => {
     if (err) {
       console.error("Server failed to start:", err);
       process.exit(1);
