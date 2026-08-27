@@ -432,7 +432,7 @@ self.addEventListener("fetch", (event) => {
           }
 
           let body = Buffer.concat(chunks);
-          const encodingHeader = (headers["content-encoding"] || headers["Content-Encoding"] || res.getHeader("content-encoding") || res.getHeader("Content-Encoding")) as string | string[] | unde[...]
+          const encodingHeader = (headers["content-encoding"] || headers["Content-Encoding"] || res.getHeader("content-encoding") || res.getHeader("Content-Encoding")) as string | string[] | undefined;
           const encoding = Array.isArray(encodingHeader) ? encodingHeader[0] : encodingHeader;
           if (encoding) {
             try {
