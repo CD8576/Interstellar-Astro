@@ -53,7 +53,19 @@ async function Start() {
   const port = INConfig.server?.port || 8080;
 
   const app = Fastify({
-    serverFactory: (handler) => createServer(handler).on("upgrade", (req, socket: Socket, head) => (req.url?.startsWith("/f") ? wisp.routeRequest(req, socket, head) : socket.destroy())),
+    serverFactory: (handler) => {
+      const server = createServer(handler);
+      server.on("upgrade", (req, socket: Socket, head) => (req.url?.startsWith("/f") ? wisp.routeRequest(req, socket, head) : socket.destroy()));
+      // Disable IPv6 to force IPv4
+      server.listen = ((originalListen) => {
+        return function(...args: any[]) {
+          const options = typeof args[0] === 'object' ? args[0] : { port: args[0] };
+          options.ipv6Only = false;
+          return originalListen.call(this, options, ...args.slice(1));
+        };
+      })(server.listen);
+      return server;
+    },
   });
 
   if (INConfig.server?.compress !== false) {
@@ -420,7 +432,7 @@ self.addEventListener("fetch", (event) => {
           }
 
           let body = Buffer.concat(chunks);
-          const encodingHeader = (headers["content-encoding"] || headers["Content-Encoding"] || res.getHeader("content-encoding") || res.getHeader("Content-Encoding")) as string | string[] | undefined[...]
+          const encodingHeader = (headers["content-encoding"] || headers["Content-Encoding"] || res.getHeader("content-encoding") || res.getHeader("Content-Encoding")) as string | string[] | unde[...]
           const encoding = Array.isArray(encodingHeader) ? encodingHeader[0] : encodingHeader;
           if (encoding) {
             try {
